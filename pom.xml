@@ -31,6 +31,7 @@
         <forest.version>1.5.19</forest.version>
         <pagehelper.version>1.4.2</pagehelper.version>
         <redisson.version>3.17.1</redisson.version>
+        <netty.version>4.1.79.Final</netty.version>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +61,14 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
