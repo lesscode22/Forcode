@@ -24,6 +24,6 @@ public class ApplicationTest {
     @Test
     void run() {
 //        handlerChain.exec("", "");
-        pipelineExecutor.acceptSync(new InstanceBuildContext());
+//        pipelineExecutor.acceptSync(new InstanceBuildContext());
     }
 }
