@@ -2,10 +2,18 @@ server:
   port: 3000
 
 spring:
-  security:
-    user:
-      name: admin
-      password: admin
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      one:
+        url: jdbc:mysql://*:3306/*?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+        username: *
+        password: *
+      two:
+        url: jdbc:mysql://*:3306/*?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+        username: *
+        password: *
 
 Forest:
   # 请求超时时间, 单位毫秒
