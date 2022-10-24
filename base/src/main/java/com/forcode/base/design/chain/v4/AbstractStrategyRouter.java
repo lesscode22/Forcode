@@ -1,9 +1,5 @@
 package com.forcode.base.design.chain.v4;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 
 /**
@@ -12,7 +8,6 @@ import javax.annotation.PostConstruct;
  * @author: TJ
  * @date:  2022-10-24
  **/
-@Component
 public abstract class AbstractStrategyRouter<T, R> {
 
     /**
@@ -23,7 +18,7 @@ public abstract class AbstractStrategyRouter<T, R> {
      */
     public interface StrategyMapper<T, R> {
         /**
-         * 根据入参获取到对应的策略处理者。可通过 if-else 实现，也可通过 Map 实现。
+         * 根据入参获取到对应的策略处理者
          *
          * @param param 入参
          * @return 策略处理者
@@ -41,10 +36,6 @@ public abstract class AbstractStrategyRouter<T, R> {
         strategyMapper = registerStrategyMapper();
     }
 
-    @Getter
-    @Setter
-    private StrategyHandler<T, R> defaultStrategyHandler = StrategyHandler.DEFAULT;
-
     /**
      * 执行策略，框架会自动根据策略分发至下游的 Handler 进行处理
      *
@@ -57,7 +48,7 @@ public abstract class AbstractStrategyRouter<T, R> {
             return strategyHandler.apply(param);
         }
 
-        return defaultStrategyHandler.apply(param);
+        return null;
     }
 
     /**
