@@ -33,8 +33,8 @@ public class DateFormatConfig {
 
         return builder -> {
 
-            builder.failOnUnknownProperties(false) // JSON串含有未知字段时, 反序列化依旧可以成功
-                    .failOnEmptyBeans(false)    // 如果一个类没有public的方法或属性时序列化为空JSON串
+            builder.failOnUnknownProperties(false)  // JSON串含有未知字段时, 反序列化依旧可以成功
+                    .failOnEmptyBeans(false)        // 如果一个类没有public的方法或属性时序列化为空JSON串
             ;
 
             // Long 转 String
