@@ -1,5 +1,6 @@
 package com.forcode.base.test;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -20,4 +21,10 @@ public interface IndexMapper {
 
     @Select("select * from order_info")
     List<Map<String, Object>> findOrder();
+
+    @Insert("insert into data_test value (1,1,1)")
+    void insertDataTest();
+
+    @Insert("insert into order_info value(2, 'BB')")
+    void insertOrder();
 }

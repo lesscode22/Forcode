@@ -39,6 +39,7 @@
         <pagehelper.version>1.4.2</pagehelper.version>
         <redisson.version>3.17.1</redisson.version>
         <netty.version>4.1.79.Final</netty.version>
+        <jasypt.version>3.0.4</jasypt.version>
     </properties>
 
     <dependencyManagement>
@@ -109,6 +110,11 @@
                 <version>${netty.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

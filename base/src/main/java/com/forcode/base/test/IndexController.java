@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
+import java.util.List;
+
 /**
  * @description:
  *
@@ -23,6 +26,9 @@ public class IndexController {
     @Autowired
     IndexController indexController;
 
+    @Autowired
+    List<DataSource> dataSourceList;
+
     @RequestMapping("test2")
     public void test2() {
 //        indexService.execute();
@@ -33,12 +39,14 @@ public class IndexController {
 
     @DS(DataSourceEnum.ORDER)
     public void findOrder() {
-        System.out.println(indexMapper.findOrder());
+//        System.out.println(indexMapper.findOrder());
+        indexMapper.insertOrder();
     }
 
     @DS
     public void findUser() {
-        System.out.println(indexMapper.findSysUser());
+//        System.out.println(indexMapper.findSysUser());
+        indexMapper.insertDataTest();
     }
 
 }

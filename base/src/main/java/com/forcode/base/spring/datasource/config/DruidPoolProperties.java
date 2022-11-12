@@ -1,66 +1,42 @@
 package com.forcode.base.spring.datasource.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.forcode.base.spring.datasource.aspect.DataSourceEnum;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * @description: 连接池属性
+ * @description: 默认连接池参数设置
  * 
  * @author: TJ
  * @date:  2022-11-09
  **/
 @Slf4j
 @Data
-@Component
-@ConfigurationProperties("spring.datasource.druid")
 public class DruidPoolProperties {
 
-    private int initialSize;
-    private int minIdle;
-    private int maxActive;
-    private int maxWait;
-    private int timeBetweenEvictionRunsMillis;
-    private int minEvictableIdleTimeMillis;
-    private int maxEvictableIdleTimeMillis;
-    private String validationQuery;
-    private boolean testWhileIdle;
-    private boolean testOnBorrow;
-    private boolean testOnReturn;
-    private boolean useGlobalDataSourceStat;
-    private String filters;
-    private String connectionProperties;
+    public static String url = "";
+    public static String username = "";
+    public static String password = "";
 
-    private Map<DataSourceEnum, DataSource> dsMap = new HashMap<>();
-
-    public DruidDataSource process(DataSourceEnum key, DruidDataSource datasource) {
-        datasource.setInitialSize(initialSize);
-        datasource.setMaxActive(maxActive);
-        datasource.setMinIdle(minIdle);
-        datasource.setMaxWait(maxWait);
-        datasource.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
-        datasource.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
-        datasource.setMaxEvictableIdleTimeMillis(maxEvictableIdleTimeMillis);
-        datasource.setValidationQuery(validationQuery);
-        datasource.setTestWhileIdle(testWhileIdle);
-        datasource.setTestOnBorrow(testOnBorrow);
-        datasource.setTestOnReturn(testOnReturn);
-        datasource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
-        datasource.setConnectionProperties(connectionProperties);
-        try {
-            datasource.setFilters(filters);
-        } catch (SQLException e) {
-            log.error("连接池异常: ", e);
-        }
-        dsMap.put(key, datasource);
-        return datasource;
-    }
+    // 初始连接数
+    public static int initialSize = 5;
+    // 最小连接池数量
+    public static int minIdle = 10;
+    // 最大连接池数量
+    public static int maxActive = 20;
+    // 配置获取连接等待超时的时间
+    public static int maxWait = 60000;
+    // 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    public static int timeBetweenEvictionRunsMillis = 60000;
+    // 配置一个连接在池中最小生存的时间，单位是毫秒
+    public static int minEvictableIdleTimeMillis = 300000;
+    // 配置一个连接在池中最大生存的时间，单位是毫秒
+    public static int maxEvictableIdleTimeMillis = 900000;
+    // 配置检测连接是否有效
+    public static String validationQuery = "SELECT 1 FROM DUAL";
+    public static boolean testWhileIdle = true;
+    public static boolean testOnBorrow = false;
+    public static boolean testOnReturn = false;
+    public static boolean useGlobalDataSourceStat = true;
+    public static String connectionProperties = "druid.stat.mergeSql=true;druid.stat.slowSqlMillis=3000";
+    public static String filters = "stat,wall";
 }

@@ -10,8 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.util.List;
-import java.util.Map;
+import java.sql.SQLException;
 
 /**
  * @description:
@@ -33,20 +32,12 @@ public class ApplicationTest {
     @Resource
     private JdbcTemplate orderJdbcTemplate;
     @Autowired
-    List<DataSource> dataSourceList;
+    DataSource dataSource;
 
     @Test
-    void run() {
+    void run() throws SQLException {
 //        handlerChain.exec("", "");
 //        pipelineExecutor.acceptSync(new InstanceBuildContext());
 //        System.out.println(rootRouter.applyStrategy("1"));
-
-        String sql = "select * from sys_user limit 2";
-        List<Map<String, Object>> data = basicJdbcTemplate.queryForList(sql);
-
-        sql = "select * from order_info";
-        List<Map<String, Object>> order = orderJdbcTemplate.queryForList(sql);
-        System.out.println(order);
-
     }
 }

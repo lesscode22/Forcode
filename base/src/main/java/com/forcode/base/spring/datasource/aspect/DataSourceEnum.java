@@ -3,6 +3,8 @@ package com.forcode.base.spring.datasource.aspect;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Objects;
+
 /**
  * @description:
  * 
@@ -19,4 +21,11 @@ public enum DataSourceEnum {
 
     private final String key;
     private final String describe;
+
+    public static DataSourceEnum of(String key) {
+        for (DataSourceEnum anEnum : DataSourceEnum.values()) {
+            if (Objects.equals(anEnum.getKey(), key)) return anEnum;
+        }
+        return null;
+    }
 }

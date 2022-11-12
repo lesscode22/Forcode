@@ -23,7 +23,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     public DynamicDataSource(DynamicDataSourceProvider dataSourceProvider) {
         Map<Object, Object> map = new HashMap<>(dataSourceProvider.loadDataSources());
         super.setTargetDataSources(map);
-        super.setDefaultTargetDataSource(map.get(DataSourceEnum.DEFAULT.getKey()));
+        super.setDefaultTargetDataSource(map.get(DataSourceEnum.DEFAULT));
         super.afterPropertiesSet();
     }
 }
