@@ -1,6 +1,5 @@
 package com.forcode.base.test;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;

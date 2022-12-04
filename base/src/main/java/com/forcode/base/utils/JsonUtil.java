@@ -23,7 +23,7 @@ public final class JsonUtil {
 
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    /**
+    /*
      * ParameterNamesModule: 从json串反序列化到对象时使用
      *      1.若对象存在合适的构造器, 则不注册此模块也能反序列化
      *      2.若对象无合适构造器, 此模块可使其正常反序列化(开启-parameters参数编译的前提下),
