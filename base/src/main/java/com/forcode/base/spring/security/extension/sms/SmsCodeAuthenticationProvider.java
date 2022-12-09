@@ -27,7 +27,7 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
         AssertUtil.notEmpty(mobile, "手机号不能为空");
 
         String smsCode = StrUtil.toStringOrNull(authentication.getCredentials());
-        AssertUtil.notEmpty(mobile, "短信验证码不能为空");
+        AssertUtil.notEmpty(smsCode, "短信验证码不能为空");
         return new SmsCodeAuthenticationToken(mobile, smsCode, Collections.emptyList());
     }
 

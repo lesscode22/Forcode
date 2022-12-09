@@ -1,7 +1,8 @@
 package com.forcode.base.spring.security.controller;
 
+import cn.hutool.core.util.IdUtil;
 import com.forcode.base.common.Result;
-import com.forcode.base.spring.security.userdetails.sysuser.UserInfo;
+import com.forcode.base.spring.security.userdetails.sysuser.SysUserInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,12 @@ public class LoginController {
 
     @GetMapping("getUser")
     public Result getUser() {
-        return Result.ok(UserInfo.getInstance());
+        return Result.ok(SysUserInfo.getInstance());
+    }
+
+    @GetMapping("/open/getId")
+    public Result getId() {
+        System.out.println(IdUtil.getSnowflakeNextIdStr());
+        return Result.ok(IdUtil.getSnowflakeNextId());
     }
 }

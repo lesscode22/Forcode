@@ -1,17 +1,22 @@
 package com.forcode.base.spring.security;
 
-import com.forcode.base.spring.security.auth.JwtAuthenticationTokenFilter;
 import com.forcode.base.spring.security.callback.*;
+import com.forcode.base.spring.security.jwt.JwtAuthenticationTokenFilter;
+import com.forcode.base.spring.security.userdetails.sysuser.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.annotation.Resource;
 
 /**
  * @description:
@@ -27,14 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private ExtendAuthConfig extendAuthConfig;
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-
-    /**
-     * 新版已不推荐在 WebSecurity 配置忽略的路径
-     */
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/js/**", "/css/**", "/images/**");
-//    }
+    @Resource
+    private SysUserService sysUserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -57,25 +56,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/doc.html", "/webjars/**", "/swagger-resources/**", "/resources/**", "/v2/api-docs/**").permitAll()
                 // 其他接口全部接受验证
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                // 登录成功回调
-                .successHandler(new LoginSuccessHandler())
-                // 登录失败回调
+                .and().formLogin().successHandler(new LoginSuccessHandler())
                 .failureHandler(new LoginFailHandler())
-                .and()
-                .logout()
-                // 注销回调
-                .logoutSuccessHandler(new LoginOutHandler())
-                .and()
-                .exceptionHandling()
+                .and().logout().logoutSuccessHandler(new LoginOutHandler())
+                .and().exceptionHandling()
                 .authenticationEntryPoint(new NoCredentialHandler())
                 .accessDeniedHandler(new NoPermissionHandler());
 
         // 自定义登录认证配置
         http.apply(extendAuthConfig);
         // 添加认证过滤器, 验证token是否合法
-//        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(sysUserService);
     }
 
     @Bean

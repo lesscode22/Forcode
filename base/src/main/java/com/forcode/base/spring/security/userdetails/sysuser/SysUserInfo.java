@@ -17,12 +17,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfo {
+public class SysUserInfo {
 
     private Long id;
     private String userName;
 
-    public static UserInfo getInstance() {
-        return new UserInfo(IdUtil.getSnowflakeNextId(), MockDataUtil.getName());
+    public static SysUserInfo getInstance() {
+        return new SysUserInfo(IdUtil.getSnowflakeNextId(), MockDataUtil.getName());
     }
 }

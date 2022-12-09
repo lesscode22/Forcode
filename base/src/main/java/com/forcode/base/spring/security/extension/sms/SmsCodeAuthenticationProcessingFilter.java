@@ -35,7 +35,7 @@ public class SmsCodeAuthenticationProcessingFilter extends AbstractAuthenticatio
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-        log.info("=== 进入短信码认证过滤器");
+        log.info("=========================== 进入短信码认证过滤器");
         String mobile = request.getParameter(FORM_MOBILE_KEY);
         mobile = StrUtil.trimToEmpty(mobile);
         String smsCode = request.getParameter(FORM_SMS_CODE_KEY);

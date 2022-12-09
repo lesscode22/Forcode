@@ -20,7 +20,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class SysUser implements UserDetails {
 
-    private UserInfo userInfo;
+    private SysUserInfo userInfo;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -29,7 +29,7 @@ public class SysUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return "$2a$10$uX55JfF6M/Ea7CJCk6Zkb.rnE0DK/0ySmmdRV4xIgwnS8KXemC5W2";
     }
 
     @Override

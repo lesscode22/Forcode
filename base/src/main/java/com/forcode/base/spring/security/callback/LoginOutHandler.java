@@ -2,6 +2,7 @@ package com.forcode.base.spring.security.callback;
 
 import com.forcode.base.common.Result;
 import com.forcode.base.utils.JsonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -17,10 +18,13 @@ import java.io.PrintWriter;
  * @author: TJ
  * @date:  2022-12-01
  **/
+@Slf4j
 public class LoginOutHandler implements LogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+
+        log.info("======================= 注销登录");
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.write(JsonUtil.toJson(Result.ok("注销成功")));

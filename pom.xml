@@ -45,6 +45,7 @@
         <spring.statemachine>3.2.0</spring.statemachine>
         <knife4j.version>2.0.9</knife4j.version>
         <java.faker>1.0.2</java.faker>
+        <jwt.version>0.11.5</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -168,6 +169,24 @@
                 <groupId>com.github.javafaker</groupId>
                 <artifactId>javafaker</artifactId>
                 <version>${java.faker}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+                <version>${jwt.version}</version>
+                <scope>runtime</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

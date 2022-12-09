@@ -1,4 +1,4 @@
-package com.forcode.base.spring.security.auth;
+package com.forcode.base.spring.security.jwt;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description: 登录验证码校验
- * 
+ *
  * @author: TJ
  * @date:  2022-11-30
  **/
