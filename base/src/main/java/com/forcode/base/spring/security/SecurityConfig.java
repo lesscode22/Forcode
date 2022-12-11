@@ -3,6 +3,7 @@ package com.forcode.base.spring.security;
 import com.forcode.base.spring.security.callback.*;
 import com.forcode.base.spring.security.extension.VerifyCodeAuthProvider;
 import com.forcode.base.spring.security.jwt.JwtAuthenticationTokenFilter;
+import com.forcode.base.spring.security.permission.DefaultPermissionEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
@@ -35,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
     @Resource
     private UserDetailsService sysUserService;
+    @Autowired
+    private DefaultPermissionEvaluator defaultPermissionEvaluator;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -48,6 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 基本设置
         http.authorizeRequests()
+                // 设置重写后的权限注解校验
+                .expressionHandler(defaultWebSecurityExpressionHandler())
                 // OPTIONS请求全部放行
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // 登录、验证码、open接口放行
@@ -76,6 +82,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(sysUserService);
         // 默认 DaoAuthenticationProvider 校验用户前增加验证码校验
         auth.authenticationProvider(new VerifyCodeAuthProvider());
+    }
+
+    @Bean
+    public DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler(){
+        DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
+        handler.setPermissionEvaluator(defaultPermissionEvaluator);
+        return handler;
     }
 
     @Bean
