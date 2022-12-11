@@ -1,5 +1,8 @@
 package com.forcode.base.spring.security.userdetails.member;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +15,9 @@ import java.util.Collection;
  * @author: TJ
  * @date:  2022-12-01
  **/
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberUser implements UserDetails {
 
     private MemberInfo memberInfo;

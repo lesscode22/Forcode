@@ -7,15 +7,21 @@ import com.forcode.base.spring.security.extension.sms.SmsCodeAuthenticationProvi
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 扩展登录
  */
 @Component
 public class ExtendAuthConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+
+    @Resource
+    private UserDetailsService memberUserService;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -27,8 +33,9 @@ public class ExtendAuthConfig extends SecurityConfigurerAdapter<DefaultSecurityF
         smsCodeFilter.setAuthenticationFailureHandler(new LoginFailHandler());
 
         SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
-        // 将短信验证码校验器注册到 HttpSecurity,  并将短信验证码过滤器添加在 UsernamePasswordAuthenticationFilter 之前
-        http.authenticationProvider(smsCodeAuthenticationProvider).addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class);
+        smsCodeAuthenticationProvider.setUserDetailsService(memberUserService);
+        http.authenticationProvider(smsCodeAuthenticationProvider)
+                .addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 }

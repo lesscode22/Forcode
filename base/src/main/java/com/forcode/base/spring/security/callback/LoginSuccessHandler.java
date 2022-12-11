@@ -1,6 +1,9 @@
 package com.forcode.base.spring.security.callback;
 
+import cn.hutool.core.map.MapUtil;
 import com.forcode.base.common.Result;
+import com.forcode.base.spring.security.LoginTypeEnum;
+import com.forcode.base.spring.security.jwt.TokenUtil;
 import com.forcode.base.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -25,9 +28,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         log.info("==================== 登录成功, 认证对象: {}", JsonUtil.toJsonPretty(authentication));
+        String requestURI = request.getRequestURI();
+        String type = LoginTypeEnum.getType(requestURI);
+        String token = TokenUtil.create(authentication.getPrincipal().toString(), MapUtil.of(LoginTypeEnum.LOGIN_IDENTITY, type));
+
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        out.write(JsonUtil.toJson(Result.ok("登录成功")));
+        out.write(JsonUtil.toJson(Result.ok(token)));
         out.flush();
         out.close();
     }

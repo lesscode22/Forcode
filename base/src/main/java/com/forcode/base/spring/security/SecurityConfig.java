@@ -1,8 +1,8 @@
 package com.forcode.base.spring.security;
 
 import com.forcode.base.spring.security.callback.*;
+import com.forcode.base.spring.security.extension.VerifyCodeAuthProvider;
 import com.forcode.base.spring.security.jwt.JwtAuthenticationTokenFilter;
-import com.forcode.base.spring.security.userdetails.sysuser.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
     @Resource
-    private SysUserService sysUserService;
+    private UserDetailsService sysUserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // OPTIONS请求全部放行
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // 登录、验证码、open接口放行
-                .antMatchers("/auth/login", "/sms/login", "/open/**").permitAll()
+                .antMatchers("/sms/login", "/open/**").permitAll()
                 // 静态资源放行
                 .antMatchers("/js/**", "/css/**", "/images/**",
                         "/doc.html", "/webjars/**", "/swagger-resources/**", "/resources/**", "/v2/api-docs/**").permitAll()
@@ -71,7 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 提供默认username登录查询用户实现
         auth.userDetailsService(sysUserService);
+        // 默认 DaoAuthenticationProvider 校验用户前增加验证码校验
+        auth.authenticationProvider(new VerifyCodeAuthProvider());
     }
 
     @Bean

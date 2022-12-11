@@ -1,6 +1,7 @@
 package com.forcode.base.spring.security.extension.sms;
 
 import cn.hutool.core.util.StrUtil;
+import com.forcode.base.spring.security.LoginTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,7 +27,8 @@ public class SmsCodeAuthenticationProcessingFilter extends AbstractAuthenticatio
     public static final String FORM_SMS_CODE_KEY = "smsCode";
 
     // 指定该过滤器匹配 /sms/login 的post请求
-    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/sms/login",
+    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
+            LoginTypeEnum.PC_PHONE.getUrl(),
             "POST");
 
     public SmsCodeAuthenticationProcessingFilter() {

@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Collections;
 
@@ -16,9 +18,11 @@ import java.util.Collections;
  * @author: TJ
  * @date:  2022-12-01
  **/
-@Setter
 @Slf4j
+@Setter
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
+
+    private UserDetailsService userDetailsService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,7 +32,9 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
         String smsCode = StrUtil.toStringOrNull(authentication.getCredentials());
         AssertUtil.notEmpty(smsCode, "短信验证码不能为空");
-        return new SmsCodeAuthenticationToken(mobile, smsCode, Collections.emptyList());
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(mobile);
+        return new SmsCodeAuthenticationToken(userDetails, null, Collections.emptyList());
     }
 
     @Override

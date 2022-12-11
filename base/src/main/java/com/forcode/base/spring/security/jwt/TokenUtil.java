@@ -25,7 +25,12 @@ public class TokenUtil {
     // 服务器端密钥
     private static final String SECRET = "cuAihCz53DZRjZwbsGcZJ2Ai6At+T142uphtJMsk7iQ=";
 
-    public static String create(Long userId) {
+    /**
+     * 创建token
+     * @param claims 私有声明
+     * @return token
+     */
+    public static String create(String userName, Map<String, Object> claims) {
 
         try {
             // 使用HS256加密算法
@@ -35,14 +40,10 @@ public class TokenUtil {
             byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET);
             Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
-            // 设置私有声明
-            Map<String, Object> claims = new HashMap<>();
-            claims.put("userId", userId);
-
             return Jwts.builder()
                     .setClaims(claims)
                     .setId(IdUtil.fastSimpleUUID())
-                    .setSubject(userId.toString())
+                    .setSubject(userName)
                     .setExpiration(new Date(Instant.now().toEpochMilli() + EXPIRATION))
                     .signWith(signingKey, signatureAlgorithm)
                     .compact();
@@ -52,13 +53,13 @@ public class TokenUtil {
         return null;
     }
 
-    public static boolean isVerify(String token, Long userId) {
+    public static boolean isVerify(String token, String userName) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET))
                 .build()
                 .parseClaimsJws(token).getBody();
         String subject = claims.getSubject();
-        return subject.equals(userId.toString());
+        return subject.equals(userName);
     }
 
     public static Claims parse(String token) {
@@ -69,12 +70,12 @@ public class TokenUtil {
     }
 
     public static void main(String[] args) {
-        String token = create(1L);
+        String token = create("1L", new HashMap<>());
         System.out.println(token);
 
         String a = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImp0aSI6IjljMTkyMjRkMDJjMjQ4NGM4NWY2MGI5ZDhjMjdiZDYwIiwic3ViIjoiMSIsImV4cCI6MTY3MDUxNzU5Mn0.LFBTk5txYO9mi62po0-jPecDKwMqs885ikdU0tPiC6M";
 //        System.out.println(parse(a));
-        System.out.println(isVerify(token, 2L));
+        System.out.println(isVerify(token, "2L"));
 
 
         Date start = new Date(Instant.now().toEpochMilli());
