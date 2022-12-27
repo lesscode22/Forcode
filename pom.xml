@@ -21,6 +21,8 @@
         <module>for-mybatis</module>
         <module>for-log</module>
         <module>for-rpc</module>
+        <module>auth-server</module>
+        <module>auth-resource</module>
     </modules>
 
     <properties>
@@ -61,14 +63,6 @@
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-starter-oauth2-client</artifactId>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>-->
-<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
