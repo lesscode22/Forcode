@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
  *  密码模式: password
  *  客户端模式: client_credentials
  *  简化模式: implicit
+ * ------------------------
+ * 令牌刷新: refresh_token
  */
 @Slf4j
 @Component
@@ -20,10 +22,13 @@ public class SysClientService implements ClientDetailsService {
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        return new BaseClientDetails("sysClientId",
+        BaseClientDetails details = new BaseClientDetails("sysClientId",
                 "sysResourceId",
                 "sysScopesId",
-                "authorization_code",
-                "sysAuthorities");
+                "password,refresh_token",
+                "sysAuthorities",
+                "http://localhost:8001/test/getUser");
+        details.setClientSecret("$2a$10$SxUZC5RuCNT4uQOe660p9uJMrGh5yvzfEEo1TpKF1tCC9gNerkSWm");
+        return details;
     }
 }

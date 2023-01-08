@@ -2,6 +2,7 @@ package com.forcode.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class AuthServerApplication {
         System.out.println("============= getUser");
     }
 
-    @PostMapping("test/getUser")
+    @GetMapping("test/getUser")
     public void getTestUser() {
         System.out.println("============= getUser");
     }

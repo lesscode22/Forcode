@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -14,7 +15,11 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.Arrays;
 
 /**
  * 授权服务器配置
@@ -27,6 +32,12 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     private TokenStore tokenStore;
     @Autowired
     private SysClientService sysClientService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+    @Autowired
+    private CustomAdditionalInfo customAdditionalInfo;
 
     /**
      * 配置令牌端点的安全约束,
@@ -58,6 +69,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authorizationCodeServices(authorizationCodeServices())
+                .authenticationManager(authenticationManager)
                 .tokenServices(tokenServices())
                 // 只允许post方式申请令牌, /oauth/token
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST);
@@ -82,6 +94,10 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         services.setTokenStore(tokenStore);
         services.setAccessTokenValiditySeconds(60 * 60 * 2);
         services.setRefreshTokenValiditySeconds(60 * 60 * 24 * 3);
+
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtAccessTokenConverter, customAdditionalInfo));
+        services.setTokenEnhancer(tokenEnhancerChain);
         return services;
     }
 }
