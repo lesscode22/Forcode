@@ -6,7 +6,6 @@ import com.forcode.base.design.chain.v4.AbstractStrategyRouter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -27,10 +26,6 @@ public class ApplicationTest {
     private PipelineExecutor pipelineExecutor;
     @Resource
     private AbstractStrategyRouter<String, String> rootRouter;
-    @Resource
-    private JdbcTemplate basicJdbcTemplate;
-    @Resource
-    private JdbcTemplate orderJdbcTemplate;
     @Autowired
     DataSource dataSource;
 
@@ -38,6 +33,7 @@ public class ApplicationTest {
     void run() throws SQLException {
 //        handlerChain.exec("", "");
 //        pipelineExecutor.acceptSync(new InstanceBuildContext());
-//        System.out.println(rootRouter.applyStrategy("1"));
+        System.out.println(rootRouter.applyStrategy("1"));
+
     }
 }
