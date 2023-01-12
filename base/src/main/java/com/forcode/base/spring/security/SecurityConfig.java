@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 登录、验证码、open接口放行
                 .antMatchers("/sms/login", "/open/**").permitAll()
                 // 静态资源放行
-                .antMatchers("/js/**", "/css/**", "/images/**",
+                .antMatchers("/js/**", "/css/**", "/images/**", "/favicon.ico",
                         "/doc.html", "/webjars/**", "/swagger-resources/**", "/resources/**", "/v2/api-docs/**").permitAll()
                 // 其他接口全部接受验证
                 .anyRequest().authenticated()

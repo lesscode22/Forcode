@@ -6,7 +6,7 @@ package com.forcode.base.design.adapter;
  * @author: TJ
  * @date:  2022-07-11
  **/
-public class Adapter implements Target{
+public class Adapter implements Target {
 
     // 持有适配者
     private Adaptee adaptee;

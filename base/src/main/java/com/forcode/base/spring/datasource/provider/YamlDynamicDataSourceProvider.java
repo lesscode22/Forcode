@@ -32,7 +32,9 @@ public class YamlDynamicDataSourceProvider implements DynamicDataSourceProvider 
     @Override
     public Map<DataSourceEnum, DataSource> loadDataSources() {
         Map<DataSourceEnum, DataSource> dataMap = new HashMap<>();
-        ds.forEach((k, prop) -> {
+        for (Map.Entry<String, Map<String, String>> entry : ds.entrySet()) {
+            String k = entry.getKey();
+            Map<String, String> prop = entry.getValue();
             DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
             dataSource.setUrl(MapUtil.getStr(prop, "url", DruidPoolProperties.url));
             dataSource.setUsername(MapUtil.getStr(prop, "username", DruidPoolProperties.username));
@@ -57,11 +59,13 @@ public class YamlDynamicDataSourceProvider implements DynamicDataSourceProvider 
                     DruidPoolProperties.connectionProperties));
             try {
                 dataSource.setFilters(MapUtil.getStr(prop, "filters", DruidPoolProperties.filters));
+                dataSource.init();
             } catch (SQLException e) {
                 log.error("连接池异常: ", e);
+                throw new RuntimeException("======= 数据库初始化异常 ==========");
             }
             dataMap.put(DataSourceEnum.of(k), dataSource);
-        });
+        }
         return dataMap;
     }
 }

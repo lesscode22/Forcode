@@ -16,15 +16,15 @@ import java.util.Map;
 @Mapper
 public interface IndexMapper {
 
-    @Select("select * from sys_user limit 2")
-    List<Map<String, Object>> findSysUser();
+    @Select("select * from data_test limit 1")
+    List<Map<String, Object>> findUser();
 
-    @Select("select * from order_info")
-    List<Map<String, Object>> findOrder();
+    @Select("select * from jc_channel_archives where rownum = 1")
+    List<Map<String, Object>> findChannel();
 
-    @Insert("insert into data_test value (1,1,1)")
-    void insertDataTest();
+    @Select("select * from jc_channel_archives where rownum = 1")
+    ChannelVO findChannelForVO();
 
-    @Insert("insert into order_info value(2, 'BB')")
-    void insertOrder();
+    @Select("select * from jc_channel_archives where rownum < 3")
+    List<ChannelVO> findChannelForVOList();
 }

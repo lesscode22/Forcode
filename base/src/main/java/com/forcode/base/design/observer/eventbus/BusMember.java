@@ -3,6 +3,7 @@ package com.forcode.base.design.observer.eventbus;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,7 +22,7 @@ public class BusMember {
         System.out.println("会员注册成功");
 
         // 调用观察者工作
-        eventBus.post(1);
+        eventBus.post(new ArrayList<>());
     }
 
     public static void main(String[] args) {

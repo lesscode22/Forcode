@@ -1,7 +1,9 @@
 package com.forcode.base.test;
 
+import com.forcode.base.spring.datasource.DataSourceHolder;
 import com.forcode.base.spring.datasource.aspect.DS;
 import com.forcode.base.spring.datasource.aspect.DataSourceEnum;
+import com.forcode.base.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,9 @@ import java.util.List;
  * @date:  2022-07-25
  **/
 @RestController
-@RequestMapping("api")
+@RequestMapping("open/api")
 public class IndexController {
 
-//    @Autowired
-//    private IndexService indexService;
     @Autowired
     IndexMapper indexMapper;
     @Autowired
@@ -32,22 +32,31 @@ public class IndexController {
 
     @GetMapping("test2")
     public void test2() {
-//        indexService.execute();
 
-        indexController.findOrder();
-        indexController.findUser();
+//        indexController.findUser();
+        indexController.findChannel();
     }
 
-    @DS(DataSourceEnum.ORDER)
-    public void findOrder() {
-//        System.out.println(indexMapper.findOrder());
-        indexMapper.insertOrder();
+//    @DS(DataSourceEnum.QD)
+    public void findChannel() {
+
+//        List<Map<String, Object>> channel = indexMapper.findChannel();
+//        System.out.println(JsonUtil.toJsonPretty(channel));
+
+//        ChannelVO channelForVO = indexMapper.findChannelForVO();
+//        System.out.println(JsonUtil.toJsonPretty(channelForVO));
+
+        DataSourceHolder.setDataSource(DataSourceEnum.QD);
+        List<ChannelVO> channelForVOList = indexMapper.findChannelForVOList();
+        System.out.println(JsonUtil.toJsonPretty(channelForVOList));
+        DataSourceHolder.clearDataSource();
+
+        System.out.println(JsonUtil.toJsonPretty(indexMapper.findUser()));
     }
 
     @DS
     public void findUser() {
-//        System.out.println(indexMapper.findSysUser());
-        indexMapper.insertDataTest();
+        indexMapper.findUser();
     }
 
 }

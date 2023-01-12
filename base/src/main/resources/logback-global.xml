@@ -64,34 +64,34 @@
     </appender>
 
     <!-- 输出到文件  -->
-    <appender name="timeFileOutput" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--日志名,指定最新的文件名，其他文件名使用FileNamePattern -->
-        <File>${LOG_HOME}/logFile/out.log</File>
-        <!--文件滚动模式-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!--日志文件输出的文件名,可设置文件类型为gz,开启文件压缩-->
-            <FileNamePattern>${LOG_HOME}/logFile/info.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
-            <!--日志文件保留天数-->
-            <MaxHistory>30</MaxHistory>
-            <!--单文件大小-->
-            <maxFileSize>100MB</maxFileSize>
-            <!--总日志文件大小, 超过上限后, 旧日志档案会被异步删除-->
-            <totalSizeCap>10GB</totalSizeCap>
-            <!--重启时清理文件-->
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
-        </rollingPolicy>
+<!--    <appender name="timeFileOutput" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        &lt;!&ndash;日志名,指定最新的文件名，其他文件名使用FileNamePattern &ndash;&gt;-->
+<!--        <File>${LOG_HOME}/logFile/out.log</File>-->
+<!--        &lt;!&ndash;文件滚动模式&ndash;&gt;-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash;日志文件输出的文件名,可设置文件类型为gz,开启文件压缩&ndash;&gt;-->
+<!--            <FileNamePattern>${LOG_HOME}/logFile/info.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>-->
+<!--            &lt;!&ndash;日志文件保留天数&ndash;&gt;-->
+<!--            <MaxHistory>30</MaxHistory>-->
+<!--            &lt;!&ndash;单文件大小&ndash;&gt;-->
+<!--            <maxFileSize>100MB</maxFileSize>-->
+<!--            &lt;!&ndash;总日志文件大小, 超过上限后, 旧日志档案会被异步删除&ndash;&gt;-->
+<!--            <totalSizeCap>10GB</totalSizeCap>-->
+<!--            &lt;!&ndash;重启时清理文件&ndash;&gt;-->
+<!--            <cleanHistoryOnStart>true</cleanHistoryOnStart>-->
+<!--        </rollingPolicy>-->
 
-        <!--输出格式-->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出-->
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <!--设置编码-->
-            <charset>UTF-8</charset>
-            <!-- 开启缓存 -->
-            <ImmediateFlush>false</ImmediateFlush>
-        </encoder>
+<!--        &lt;!&ndash;输出格式&ndash;&gt;-->
+<!--        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--            &lt;!&ndash;格式化输出&ndash;&gt;-->
+<!--            <pattern>${CONSOLE_LOG_PATTERN}</pattern>-->
+<!--            &lt;!&ndash;设置编码&ndash;&gt;-->
+<!--            <charset>UTF-8</charset>-->
+<!--            &lt;!&ndash; 开启缓存 &ndash;&gt;-->
+<!--            <ImmediateFlush>false</ImmediateFlush>-->
+<!--        </encoder>-->
 
-    </appender>
+<!--    </appender>-->
 
     <!-- 异步配置 -->
     <appender name ="ASYNC" class= "ch.qos.logback.classic.AsyncAppender">

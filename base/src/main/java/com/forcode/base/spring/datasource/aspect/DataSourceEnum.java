@@ -17,6 +17,7 @@ public enum DataSourceEnum {
 
     DEFAULT("default", "默认数据源"),
     ORDER("order", "订单中心"),
+    QD("qd", "渠道"),
     ;
 
     private final String key;
