@@ -50,6 +50,8 @@
         <knife4j.version>2.0.9</knife4j.version>
         <java.faker>1.0.2</java.faker>
         <jwt.version>0.11.5</jwt.version>
+        <jol.version>0.16</jol.version>
+        <tlog.version>1.5.0</tlog.version>
     </properties>
 
     <dependencyManagement>
@@ -210,6 +212,18 @@
                 <version>${jwt.version}</version>
                 <scope>runtime</scope>
             </dependency>
+            <dependency>
+                <groupId>org.openjdk.jol</groupId>
+                <artifactId>jol-core</artifactId>
+                <version>${jol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yomahub</groupId>
+                <artifactId>tlog-all-spring-boot-starter</artifactId>
+                <version>${tlog.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

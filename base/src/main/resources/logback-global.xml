@@ -112,9 +112,9 @@
         </root>
 
         <!-- 输出日志细粒度控制, 去掉一些debug日志 -->
-<!--        <logger name="org.springframework" level="INFO" additivity="false">-->
-<!--            <appender-ref ref="CONSOLE" />-->
-<!--        </logger>-->
+        <logger name="org.springframework" level="INFO" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
         <logger name="io.netty" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE" />
         </logger>
@@ -125,6 +125,9 @@
             <appender-ref ref="CONSOLE" />
         </logger>
         <logger name="com.ulisesbocchio.jasyptspringboot" level="INFO" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="springfox.documentation" level="INFO" additivity="false">
             <appender-ref ref="CONSOLE" />
         </logger>
     </springProfile>

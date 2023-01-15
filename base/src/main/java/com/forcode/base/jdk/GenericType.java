@@ -1,4 +1,4 @@
-package com.forcode.base.practices;
+package com.forcode.base.jdk;
 
 import org.springframework.core.ParameterizedTypeReference;
 
