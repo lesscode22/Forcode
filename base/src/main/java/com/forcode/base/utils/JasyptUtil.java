@@ -11,7 +11,7 @@ import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
  **/
 public class JasyptUtil {
 
-    public static String encrypt(String plaintext) {
+    public static String encrypt(String plaintext, String password) {
         //加密工具
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         //加密配置
@@ -19,19 +19,19 @@ public class JasyptUtil {
         // 算法类型
         config.setAlgorithm("PBEWithMD5AndDES");
         // 加密秘钥
-        config.setPassword("PEB123@321BEP");
+        config.setPassword(password);
         encryptor.setConfig(config);
         return encryptor.encrypt(plaintext);
     }
 
-    public static String decrypt(String ciphertext) {
+    public static String decrypt(String ciphertext, String password) {
         //加密工具
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         //加密配置
         EnvironmentStringPBEConfig config = new EnvironmentStringPBEConfig();
         config.setAlgorithm("PBEWithMD5AndDES");
         // 秘钥
-        config.setPassword("PEB123@321BEP");
+        config.setPassword(password);
         encryptor.setConfig(config);
         return encryptor.decrypt(ciphertext);
     }

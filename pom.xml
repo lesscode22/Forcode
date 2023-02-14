@@ -52,6 +52,7 @@
         <jwt.version>0.11.5</jwt.version>
         <jol.version>0.16</jol.version>
         <tlog.version>1.5.0</tlog.version>
+        <groovy>4.0.7</groovy>
     </properties>
 
     <dependencyManagement>
@@ -223,7 +224,17 @@
                 <artifactId>tlog-all-spring-boot-starter</artifactId>
                 <version>${tlog.version}</version>
             </dependency>
-
+            <!-- https://mvnrepository.com/artifact/org.apache.groovy/groovy -->
+            <dependency>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy</artifactId>
+                <version>${groovy}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy-sql</artifactId>
+                <version>${groovy}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
