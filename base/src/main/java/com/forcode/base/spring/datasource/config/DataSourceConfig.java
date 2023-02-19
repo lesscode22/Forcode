@@ -8,12 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 public class DataSourceConfig {
 
     @Autowired
-    private DynamicDataSourceProvider dataSourceProvider;
+    private List<DynamicDataSourceProvider> dataSourceProvider;
 
     @Bean
     @Primary

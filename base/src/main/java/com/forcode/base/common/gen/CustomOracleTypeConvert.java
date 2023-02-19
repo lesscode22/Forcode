@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import static com.baomidou.mybatisplus.generator.config.rules.DbColumnType.*;
 
 /**
- * 修改 Number 类型映射方式为旧版本的
+ * 修改 Number 类型映射方式为旧版本
  * 否则主键 Number(20, 0) 也会映射为 BigDecimal
  */
 public class CustomOracleTypeConvert extends OracleTypeConvert {

@@ -53,6 +53,9 @@
         <jol.version>0.16</jol.version>
         <tlog.version>1.5.0</tlog.version>
         <groovy>4.0.7</groovy>
+        <shardingsphere-jdbc>5.2.1</shardingsphere-jdbc>
+        <!-- 提升版本, 适配 shardingsphere -->
+        <snakeyaml.version>1.33</snakeyaml.version>
     </properties>
 
     <dependencyManagement>
@@ -234,6 +237,12 @@
                 <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-sql</artifactId>
                 <version>${groovy}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+                <version>${shardingsphere-jdbc}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

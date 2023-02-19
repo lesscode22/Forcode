@@ -5,6 +5,7 @@ import com.forcode.base.spring.datasource.provider.DynamicDataSourceProvider;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,8 +21,11 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         return DataSourceHolder.getDataSource();
     }
 
-    public DynamicDataSource(DynamicDataSourceProvider dataSourceProvider) {
-        Map<Object, Object> map = new HashMap<>(dataSourceProvider.loadDataSources());
+    public DynamicDataSource(List<DynamicDataSourceProvider> dataSourceProviders) {
+        Map<Object, Object> map = new HashMap<>();
+        for (DynamicDataSourceProvider provider : dataSourceProviders) {
+            map.putAll(provider.loadDataSources());
+        }
         super.setTargetDataSources(map);
         super.setDefaultTargetDataSource(map.get(DataSourceEnum.DEFAULT));
         super.afterPropertiesSet();

@@ -12,7 +12,7 @@
 
     <!-- property定义参数, 后面可以通过${}引用 -->
     <!-- 输出日志格式 -->
-    <property name="CONSOLE_LOG_PATTERN" value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %green([%thread]) %boldMagenta(%logger{50}) - %cyan(%msg%n)"/>
+    <property name="CONSOLE_LOG_PATTERN" value="%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %X{tl} %green([%thread]) %boldMagenta(%logger{50}) - %cyan(%msg%n)"/>
     <!-- 日志输出文件位置 -->
     <property name="LOG_HOME" value="F:/data" />
 <!--    <property name="LOG_HOME" value="/home/frestream" />-->

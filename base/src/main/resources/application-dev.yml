@@ -19,44 +19,13 @@ spring:
         username: ENC(W5tQni4AYHg/M0QWOoMVQQfGS0puvAh5)
         password: ENC(wYm3O62cHYWF01cvRFqChyKefm3q5i42)
 
-      order:
-        url: ENC(QR8DIaR/ahu9fTr3b4YwnnAHra7UuDqyOvhVQVf3QsggWrZh6MpLa+kc9ZT+hLAkOY1cz6i1ii+KxbA4H2/5URM7JgAXekIDtvDAVzeUM44WH2kk0yeFod1Uo5pAHY2EhLEqZUC/MNw6J3vUwIWk6cAqa1QRyIz6ip1gLIcVdF9Ds9dqf2iZRxVRjGRKc1yTdjHimhDMLsiJFKkbUuXpn0kYC7xP5dYYKmQP6wRAvXPTMcO5BCiNAQ==)
-        username: ENC(W5tQni4AYHg/M0QWOoMVQQfGS0puvAh5)
-        password: ENC(wYm3O62cHYWF01cvRFqChyKefm3q5i42)
-
-        initialSize: 2
-        maxActive: 15
-
-#    druid:
-#      # 初始连接数
-#      initialSize: 5
-#      # 最小连接池数量
-#      minIdle: 10
-#      # 最大连接池数量
-#      maxActive: 20
-#      # 配置获取连接等待超时的时间
-#      maxWait: 60000
-#      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-#      timeBetweenEvictionRunsMillis: 60000
-#      # 配置一个连接在池中最小生存的时间，单位是毫秒
-#      minEvictableIdleTimeMillis: 300000
-#      # 配置一个连接在池中最大生存的时间，单位是毫秒
-#      maxEvictableIdleTimeMillis: 900000
-#      # 配置检测连接是否有效
-#      validationQuery: SELECT 1 FROM DUAL
-#      testWhileIdle: true
-#      testOnBorrow: false
-#      testOnReturn: false
-#      useGlobalDataSourceStat: true
-#      filters: stat,wall
-#      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=3000
-#      statViewServlet:
-#        enabled: true
-#        url-pattern: /druid/*
-#        reset-enable: false
-#        # 控制台管理用户名和密码
-#        login-username: admin
-#        login-password: admin
+#      order:
+#        url: QR8DIaR/ahu9fTr3b4YwnnAHra7UuDqyOvhVQVf3QsggWrZh6MpLa+kc9ZT+hLAkOY1cz6i1ii+KxbA4H2/5URM7JgAXekIDtvDAVzeUM44WH2kk0yeFod1Uo5pAHY2EhLEqZUC/MNw6J3vUwIWk6cAqa1QRyIz6ip1gLIcVdF9Ds9dqf2iZRxVRjGRKc1yTdjHimhDMLsiJFKkbUuXpn0kYC7xP5dYYKmQP6wRAvXPTMcO5BCiNAQ==
+#        username: W5tQni4AYHg/M0QWOoMVQQfGS0puvAh5
+#        password: wYm3O62cHYWF01cvRFqChyKefm3q5i42
+#
+#        initialSize: 2
+#        maxActive: 15
 
 Forest:
   # 请求超时时间, 单位毫秒
